@@ -1,0 +1,6 @@
+com\bos\product\model\ProductDetail.class
+com\bos\product\repository\ProductRepository.class
+com\bos\product\controller\ProductController.class
+com\bos\product\model\Product.class
+com\bos\product\ProductApplication.class
+com\bos\product\service\ProductService.class
