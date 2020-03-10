@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer> {
-    @Query(value = "SELECT * FROM product WHERE id_seller = :id_seller", nativeQuery = true)
+    @Query(value = "SELECT * FROM product WHERE id_seller = :id_seller ORDER BY product_name", nativeQuery = true)
     List<Product> getAllProductBySellerID(@Param("id_seller") int id_seller);
 
     @Query(value = "SELECT image_path FROM product WHERE id_product = :id_product", nativeQuery = true)
