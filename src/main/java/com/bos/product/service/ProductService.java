@@ -84,4 +84,18 @@ public class ProductService {
 
         return saveProduct(p_productDetail);
     }
+
+    public ResultEntity deleteProduct(int p_productId){
+        ResultEntity l_output;
+
+        try{
+            g_productRepository.deleteById(p_productId);
+            l_output = new ResultEntity("Y", ErrorCode.BIT_000);
+
+        }catch (Exception e){
+            l_output = new ResultEntity(e.toString(), ErrorCode.BIT_999);
+        }
+
+        return l_output;
+    }
 }

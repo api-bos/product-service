@@ -27,4 +27,9 @@ public class ProductController {
     public ResultEntity updateProduct(@RequestBody ProductDetail p_productDetail){
         return g_productService.updateProduct(p_productDetail);
     }
+
+    @DeleteMapping(value = "/product/{id_product}")
+    public ResultEntity deleteProduct(@PathVariable("id_product") int p_productId){
+        return g_productService.deleteProduct(p_productId);
+    }
 }
