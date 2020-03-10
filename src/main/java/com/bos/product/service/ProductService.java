@@ -51,7 +51,7 @@ public class ProductService {
     }
 
     public ResultEntity getProduct(int p_sellerId){
-        return new ResultEntity(g_productRepository.getAllProductBySellerID(p_sellerId), ErrorCode.B000);
+        return new ResultEntity(g_productRepository.getAllProductBySellerID(p_sellerId), ErrorCode.BIT_000);
     }
 
     public ResultEntity saveProduct(ProductDetail p_productDetail){
@@ -63,11 +63,11 @@ public class ProductService {
         if (!FULL_PATH.equals("failed")){
             g_productRepository.save(saveData(p_productDetail, FULL_PATH));
 
-            l_output = new ResultEntity("Y", ErrorCode.B000);
+            l_output = new ResultEntity("Y", ErrorCode.BIT_000);
         }else {
             g_productRepository.save(saveData(p_productDetail, ""));
 
-            l_output = new ResultEntity("Y", ErrorCode.B000);
+            l_output = new ResultEntity("Y", ErrorCode.BIT_000);
         }
 
         return  l_output;
