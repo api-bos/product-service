@@ -32,4 +32,9 @@ public class ProductController {
     public ResultEntity deleteProduct(@PathVariable("id_product") int p_productId){
         return g_productService.deleteProduct(p_productId);
     }
+
+    @GetMapping(value = "/productCategory")
+    public ResultEntity getProduct(){
+        return g_productService.getProductCategory();
+    }
 }

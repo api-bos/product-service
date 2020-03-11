@@ -4,7 +4,9 @@ import bca.bit.proj.library.base.ResultEntity;
 import bca.bit.proj.library.enums.ErrorCode;
 import com.bos.product.model.Product;
 import com.bos.product.model.ProductDetail;
+import com.bos.product.repository.ProductCategoryRepository;
 import com.bos.product.repository.ProductRepository;
+import org.apache.logging.log4j.message.ReusableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ import java.util.Date;
 public class ProductService {
     @Autowired
     ProductRepository g_productRepository;
+    @Autowired
+    ProductCategoryRepository g_productCategoryRepository;
 
     public String saveImage(String p_imageEncoded) {
         String tmp_uploadLocation = "C:\\Users\\U067726\\Pictures\\BOS\\Product";
@@ -92,6 +96,18 @@ public class ProductService {
             g_productRepository.deleteById(p_productId);
             l_output = new ResultEntity("Y", ErrorCode.BIT_000);
 
+        }catch (Exception e){
+            l_output = new ResultEntity(e.toString(), ErrorCode.BIT_999);
+        }
+
+        return l_output;
+    }
+
+    public ResultEntity getProductCategory(){
+        ResultEntity l_output;
+
+        try {
+            l_output = new ResultEntity(g_productCategoryRepository.findAll(), ErrorCode.BIT_000);
         }catch (Exception e){
             l_output = new ResultEntity(e.toString(), ErrorCode.BIT_999);
         }
