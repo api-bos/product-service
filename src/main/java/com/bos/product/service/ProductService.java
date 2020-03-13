@@ -4,9 +4,10 @@ import bca.bit.proj.library.base.ResultEntity;
 import bca.bit.proj.library.enums.ErrorCode;
 import com.bos.product.model.Product;
 import com.bos.product.model.ProductDetail;
+import com.bos.product.model.response.ProductCategoryReponse;
+import com.bos.product.model.response.ProductResponse;
 import com.bos.product.repository.ProductCategoryRepository;
 import com.bos.product.repository.ProductRepository;
-import org.apache.logging.log4j.message.ReusableMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +15,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -55,7 +58,26 @@ public class ProductService {
     }
 
     public ResultEntity getProduct(int p_sellerId){
-        return new ResultEntity(g_productRepository.getAllProductBySellerID(p_sellerId), ErrorCode.BIT_000);
+        List<Product> tmp_productList = g_productRepository.getAllProductBySellerID(p_sellerId);
+        ArrayList<ProductResponse> l_productResponseList = new ArrayList<>();
+
+        for (int i=0; i<tmp_productList.size(); i++){
+            ProductCategoryReponse tmp_productCategoryResponse = new ProductCategoryReponse();
+            tmp_productCategoryResponse.setId_prd_category(tmp_productList.get(i).getId_prd_category());
+
+            ProductResponse tmp_productResponse = new ProductResponse();
+            tmp_productResponse.setId_product(tmp_productList.get(i).getId_product());
+            tmp_productResponse.setId_seller(tmp_productList.get(i).getId_seller());
+            tmp_productResponse.setPrdCategory(tmp_productCategoryResponse);
+            tmp_productResponse.setProduct_name(tmp_productList.get(i).getProduct_name());
+            tmp_productResponse.setPrice(tmp_productList.get(i).getPrice());
+            tmp_productResponse.setStock(tmp_productList.get(i).getStock());
+            tmp_productResponse.setImage_path(tmp_productList.get(i).getImage_path());
+
+            l_productResponseList.add(tmp_productResponse);
+        }
+
+        return new ResultEntity(l_productResponseList, ErrorCode.BIT_000);
     }
 
     public ResultEntity saveProduct(ProductDetail p_productDetail){
