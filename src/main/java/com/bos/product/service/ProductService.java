@@ -6,6 +6,7 @@ import com.bos.product.model.Product;
 import com.bos.product.model.ProductDetail;
 import com.bos.product.model.response.ProductCategoryReponse;
 import com.bos.product.model.response.ProductResponse;
+import com.bos.product.model.response.SellerResponse;
 import com.bos.product.repository.ProductCategoryRepository;
 import com.bos.product.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,9 +66,12 @@ public class ProductService {
             ProductCategoryReponse tmp_productCategoryResponse = new ProductCategoryReponse();
             tmp_productCategoryResponse.setId_prd_category(tmp_productList.get(i).getId_prd_category());
 
+            SellerResponse tmp_sellerResponse = new SellerResponse();
+            tmp_sellerResponse.setId_seller(tmp_productList.get(i).getId_seller());
+
             ProductResponse tmp_productResponse = new ProductResponse();
             tmp_productResponse.setId_product(tmp_productList.get(i).getId_product());
-            tmp_productResponse.setId_seller(tmp_productList.get(i).getId_seller());
+            tmp_productResponse.setSeller(tmp_sellerResponse);
             tmp_productResponse.setPrdCategory(tmp_productCategoryResponse);
             tmp_productResponse.setProduct_name(tmp_productList.get(i).getProduct_name());
             tmp_productResponse.setPrice(tmp_productList.get(i).getPrice());

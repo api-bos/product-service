@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProductResponse {
     private int id_product;
-    private int id_seller;
+    private SellerResponse seller;
     private ProductCategoryReponse prdCategory;
     private String product_name;
     private int price;

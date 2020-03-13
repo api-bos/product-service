@@ -1,3 +1,4 @@
+com\bos\product\model\response\SellerResponse.class
 com\bos\product\model\ProductDetail.class
 com\bos\product\model\ProductCategory.class
 com\bos\product\repository\ProductRepository.class
