@@ -1,7 +1,7 @@
 package com.bos.product.controller;
 
 import bca.bit.proj.library.base.ResultEntity;
-import com.bos.product.model.ProductDetail;
+import com.bos.product.model.request.ProductRequest;
 import com.bos.product.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,13 +19,13 @@ public class ProductController {
     }
 
     @PostMapping(value = "/product", consumes = "application/json")
-    public ResultEntity saveProduct(@RequestBody ProductDetail p_productDetail){
-        return g_productService.saveProduct(p_productDetail);
+    public ResultEntity saveProduct(@RequestBody ProductRequest p_productRequest){
+        return g_productService.saveProduct(p_productRequest);
     }
 
     @PutMapping(value = "/product", consumes = "application/json")
-    public ResultEntity updateProduct(@RequestBody ProductDetail p_productDetail){
-        return g_productService.updateProduct(p_productDetail);
+    public ResultEntity updateProduct(@RequestBody ProductRequest p_productRequest){
+        return g_productService.updateProduct(p_productRequest);
     }
 
     @DeleteMapping(value = "/product/{id_product}")
@@ -36,5 +36,10 @@ public class ProductController {
     @GetMapping(value = "/productCategory")
     public ResultEntity getProduct(){
         return g_productService.getProductCategory();
+    }
+
+    @GetMapping(value = "/productDetail/{id_product}")
+    public ResultEntity getProductDetail(@PathVariable("id_product") int p_productId){
+        return g_productService.getProductDetail(p_productId);
     }
 }

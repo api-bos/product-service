@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 
 @Entity
 @Getter
@@ -23,4 +24,6 @@ public class Product {
     private int price;
     private int stock;
     private String image_path;
+    private int is_deleted;
+    private String weight;
 }

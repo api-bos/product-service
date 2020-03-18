@@ -3,7 +3,7 @@ package com.bos.product.service;
 import bca.bit.proj.library.base.ResultEntity;
 import bca.bit.proj.library.enums.ErrorCode;
 import com.bos.product.model.Product;
-import com.bos.product.model.ProductDetail;
+import com.bos.product.model.request.ProductRequest;
 import com.bos.product.model.response.ProductCategoryReponse;
 import com.bos.product.model.response.ProductResponse;
 import com.bos.product.model.response.SellerResponse;
@@ -45,15 +45,17 @@ public class ProductService {
         }
     }
 
-    private Product saveData(ProductDetail p_productDetail, String p_imagePath){
+    private Product saveData(ProductRequest p_productRequest, String p_imagePath){
         Product tmp_product = new Product();
-        tmp_product.setId_product(p_productDetail.getId_product());
-        tmp_product.setId_seller(p_productDetail.getId_seller());
-        tmp_product.setId_prd_category(p_productDetail.getId_prd_category());
-        tmp_product.setProduct_name(p_productDetail.getProduct_name());
-        tmp_product.setPrice(p_productDetail.getPrice());
-        tmp_product.setStock(p_productDetail.getStock());
+        tmp_product.setId_product(p_productRequest.getId_product());
+        tmp_product.setId_seller(p_productRequest.getId_seller());
+        tmp_product.setId_prd_category(p_productRequest.getId_prd_category());
+        tmp_product.setProduct_name(p_productRequest.getProduct_name());
+        tmp_product.setPrice(p_productRequest.getPrice());
+        tmp_product.setStock(p_productRequest.getStock());
         tmp_product.setImage_path(p_imagePath);
+        tmp_product.setWeight(p_productRequest.getWeight());
+        tmp_product.setIs_deleted(0);
 
         return tmp_product;
     }
@@ -76,6 +78,7 @@ public class ProductService {
             tmp_productResponse.setProduct_name(tmp_productList.get(i).getProduct_name());
             tmp_productResponse.setPrice(tmp_productList.get(i).getPrice());
             tmp_productResponse.setStock(tmp_productList.get(i).getStock());
+            tmp_productResponse.setWeight(tmp_productList.get(i).getWeight());
             tmp_productResponse.setImage_path(tmp_productList.get(i).getImage_path());
 
             l_productResponseList.add(tmp_productResponse);
@@ -84,18 +87,18 @@ public class ProductService {
         return new ResultEntity(l_productResponseList, ErrorCode.BIT_000);
     }
 
-    public ResultEntity saveProduct(ProductDetail p_productDetail){
+    public ResultEntity saveProduct(ProductRequest p_productRequest){
         String FULL_PATH = "";
         ResultEntity l_output;
 
-        FULL_PATH = saveImage(p_productDetail.getBase64StringImage());
+        FULL_PATH = saveImage(p_productRequest.getBase64StringImage());
 
         if (!FULL_PATH.equals("failed")){
-            g_productRepository.save(saveData(p_productDetail, FULL_PATH));
+            g_productRepository.save(saveData(p_productRequest, FULL_PATH));
 
             l_output = new ResultEntity("Y", ErrorCode.BIT_000);
         }else {
-            g_productRepository.save(saveData(p_productDetail, ""));
+            g_productRepository.save(saveData(p_productRequest, ""));
 
             l_output = new ResultEntity("Y", ErrorCode.BIT_000);
         }
@@ -103,8 +106,8 @@ public class ProductService {
         return  l_output;
     }
 
-    public ResultEntity updateProduct(ProductDetail p_productDetail){
-        String tmp_unusedImagePath = g_productRepository.getImagePathByProductId(p_productDetail.getId_product());
+    public ResultEntity updateProduct(ProductRequest p_productRequest){
+        String tmp_unusedImagePath = g_productRepository.getImagePathByProductId(p_productRequest.getId_product());
         System.out.println(tmp_unusedImagePath);
 
         File tmp_unusedImage = new File(tmp_unusedImagePath);
@@ -112,14 +115,14 @@ public class ProductService {
             tmp_unusedImage.delete();
         }
 
-        return saveProduct(p_productDetail);
+        return saveProduct(p_productRequest);
     }
 
     public ResultEntity deleteProduct(int p_productId){
         ResultEntity l_output;
 
         try{
-            g_productRepository.deleteById(p_productId);
+            g_productRepository.deleteProduct(p_productId);
             l_output = new ResultEntity("Y", ErrorCode.BIT_000);
 
         }catch (Exception e){
@@ -134,6 +137,18 @@ public class ProductService {
 
         try {
             l_output = new ResultEntity(g_productCategoryRepository.findAll(), ErrorCode.BIT_000);
+        }catch (Exception e){
+            l_output = new ResultEntity(e.toString(), ErrorCode.BIT_999);
+        }
+
+        return l_output;
+    }
+
+    public ResultEntity getProductDetail(int p_productId){
+        ResultEntity l_output;
+
+        try {
+            l_output = new ResultEntity(g_productRepository.findById(p_productId), ErrorCode.BIT_000);
         }catch (Exception e){
             l_output = new ResultEntity(e.toString(), ErrorCode.BIT_999);
         }
