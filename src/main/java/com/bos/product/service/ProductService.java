@@ -3,6 +3,7 @@ package com.bos.product.service;
 import bca.bit.proj.library.base.ResultEntity;
 import bca.bit.proj.library.enums.ErrorCode;
 import com.bos.product.model.Product;
+import com.bos.product.model.dao.ProductCategoryDao;
 import com.bos.product.model.request.ProductRequest;
 import com.bos.product.model.response.ProductCategoryReponse;
 import com.bos.product.model.response.ProductResponse;
@@ -132,11 +133,11 @@ public class ProductService {
         return l_output;
     }
 
-    public ResultEntity getProductCategory(){
+    public ResultEntity getProductCategory(int p_sellerId){
         ResultEntity l_output;
 
         try {
-            l_output = new ResultEntity(g_productCategoryRepository.findAll(), ErrorCode.BIT_000);
+            l_output = new ResultEntity(g_productCategoryRepository.getBySellerId(p_sellerId), ErrorCode.BIT_000);
         }catch (Exception e){
             l_output = new ResultEntity(e.toString(), ErrorCode.BIT_999);
         }

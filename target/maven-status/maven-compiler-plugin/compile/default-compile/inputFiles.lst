@@ -4,6 +4,7 @@ C:\Users\U067726\Downloads\Github\product-service\src\main\java\com\bos\product\
 C:\Users\U067726\Downloads\Github\product-service\src\main\java\com\bos\product\controller\ProductController.java
 C:\Users\U067726\Downloads\Github\product-service\src\main\java\com\bos\product\model\Product.java
 C:\Users\U067726\Downloads\Github\product-service\src\main\java\com\bos\product\ProductApplication.java
+C:\Users\U067726\Downloads\Github\product-service\src\main\java\com\bos\product\model\dao\ProductCategoryDao.java
 C:\Users\U067726\Downloads\Github\product-service\src\main\java\com\bos\product\service\ProductService.java
 C:\Users\U067726\Downloads\Github\product-service\src\main\java\com\bos\product\model\response\ProductResponse.java
 C:\Users\U067726\Downloads\Github\product-service\src\main\java\com\bos\product\repository\ProductCategoryRepository.java

@@ -33,9 +33,9 @@ public class ProductController {
         return g_productService.deleteProduct(p_productId);
     }
 
-    @GetMapping(value = "/productCategory")
-    public ResultEntity getProduct(){
-        return g_productService.getProductCategory();
+    @GetMapping(value = "/productCategory/{id_seller}")
+    public ResultEntity getProductCategory(@PathVariable("id_seller") int p_sellerId){
+        return g_productService.getProductCategory(p_sellerId);
     }
 
     @GetMapping(value = "/productDetail/{id_product}")
