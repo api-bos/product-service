@@ -42,4 +42,9 @@ public class ProductController {
     public ResultEntity getProductDetail(@PathVariable("id_product") int p_productId){
         return g_productService.getProductDetail(p_productId);
     }
+
+    @GetMapping(value = "/productCategory")
+    public ResultEntity getAllProductCategory(){
+        return g_productService.getAllProductCategory();
+    }
 }

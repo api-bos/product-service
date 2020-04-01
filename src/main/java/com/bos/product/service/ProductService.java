@@ -156,4 +156,16 @@ public class ProductService {
 
         return l_output;
     }
+
+    public ResultEntity getAllProductCategory(){
+        ResultEntity l_output;
+
+        try {
+            l_output = new ResultEntity(g_productCategoryRepository.findAll(), ErrorCode.BIT_000);
+        }catch (Exception e){
+            l_output = new ResultEntity(e.toString(), ErrorCode.BIT_999);
+        }
+
+        return l_output;
+    }
 }
