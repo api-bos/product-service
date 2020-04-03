@@ -13,9 +13,24 @@ public class ProductController {
     @Autowired
     ProductService g_productService;
 
-    @GetMapping(value = "/product/{id_seller}")
-    public ResultEntity getProduct(@PathVariable("id_seller") int id_seller){
-        return g_productService.getProduct(id_seller);
+    @GetMapping(value = "/productByName/{id_seller}")
+    public ResultEntity getProductByName(@PathVariable("id_seller") int id_seller){
+        return g_productService.getProductByName(id_seller);
+    }
+
+    @GetMapping(value = "/productByDate/{id_seller}")
+    public ResultEntity getProductByDate(@PathVariable("id_seller") int id_seller){
+        return g_productService.getProductByDate(id_seller);
+    }
+
+    @GetMapping(value = "/productByPrice/{id_seller}")
+    public ResultEntity getProductByPrice(@PathVariable("id_seller") int id_seller){
+        return g_productService.getProductByPrice(id_seller);
+    }
+
+    @GetMapping(value = "/productByBestSelling/{id_seller}")
+    public ResultEntity getProductByBestSelling(@PathVariable("id_seller") int id_seller){
+        return g_productService.getProductByBestSelling(id_seller);
     }
 
     @PostMapping(value = "/product", consumes = "application/json")

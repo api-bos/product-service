@@ -3,7 +3,6 @@ package com.bos.product.service;
 import bca.bit.proj.library.base.ResultEntity;
 import bca.bit.proj.library.enums.ErrorCode;
 import com.bos.product.model.Product;
-import com.bos.product.model.dao.ProductCategoryDao;
 import com.bos.product.model.request.ProductRequest;
 import com.bos.product.model.response.ProductCategoryReponse;
 import com.bos.product.model.response.ProductResponse;
@@ -61,8 +60,89 @@ public class ProductService {
         return tmp_product;
     }
 
-    public ResultEntity getProduct(int p_sellerId){
-        List<Product> tmp_productList = g_productRepository.getAllProductBySellerID(p_sellerId);
+    public ResultEntity getProductByName(int p_sellerId){
+        List<Product> tmp_productList = g_productRepository.getProductNameBySellerId(p_sellerId);
+        ArrayList<ProductResponse> l_productResponseList = new ArrayList<>();
+
+        for (int i=0; i<tmp_productList.size(); i++){
+            ProductCategoryReponse tmp_productCategoryResponse = new ProductCategoryReponse();
+            tmp_productCategoryResponse.setId_prd_category(tmp_productList.get(i).getId_prd_category());
+
+            SellerResponse tmp_sellerResponse = new SellerResponse();
+            tmp_sellerResponse.setId_seller(tmp_productList.get(i).getId_seller());
+
+            ProductResponse tmp_productResponse = new ProductResponse();
+            tmp_productResponse.setId_product(tmp_productList.get(i).getId_product());
+            tmp_productResponse.setSeller(tmp_sellerResponse);
+            tmp_productResponse.setPrdCategory(tmp_productCategoryResponse);
+            tmp_productResponse.setProduct_name(tmp_productList.get(i).getProduct_name());
+            tmp_productResponse.setPrice(tmp_productList.get(i).getPrice());
+            tmp_productResponse.setStock(tmp_productList.get(i).getStock());
+            tmp_productResponse.setWeight(tmp_productList.get(i).getWeight());
+            tmp_productResponse.setImage_path(tmp_productList.get(i).getImage_path());
+
+            l_productResponseList.add(tmp_productResponse);
+        }
+
+        return new ResultEntity(l_productResponseList, ErrorCode.BIT_000);
+    }
+
+    public ResultEntity getProductByDate(int p_sellerId){
+        List<Product> tmp_productList = g_productRepository.getProductDateBySellerId(p_sellerId);
+        ArrayList<ProductResponse> l_productResponseList = new ArrayList<>();
+
+        for (int i=0; i<tmp_productList.size(); i++){
+            ProductCategoryReponse tmp_productCategoryResponse = new ProductCategoryReponse();
+            tmp_productCategoryResponse.setId_prd_category(tmp_productList.get(i).getId_prd_category());
+
+            SellerResponse tmp_sellerResponse = new SellerResponse();
+            tmp_sellerResponse.setId_seller(tmp_productList.get(i).getId_seller());
+
+            ProductResponse tmp_productResponse = new ProductResponse();
+            tmp_productResponse.setId_product(tmp_productList.get(i).getId_product());
+            tmp_productResponse.setSeller(tmp_sellerResponse);
+            tmp_productResponse.setPrdCategory(tmp_productCategoryResponse);
+            tmp_productResponse.setProduct_name(tmp_productList.get(i).getProduct_name());
+            tmp_productResponse.setPrice(tmp_productList.get(i).getPrice());
+            tmp_productResponse.setStock(tmp_productList.get(i).getStock());
+            tmp_productResponse.setWeight(tmp_productList.get(i).getWeight());
+            tmp_productResponse.setImage_path(tmp_productList.get(i).getImage_path());
+
+            l_productResponseList.add(tmp_productResponse);
+        }
+
+        return new ResultEntity(l_productResponseList, ErrorCode.BIT_000);
+    }
+
+    public ResultEntity getProductByPrice(int p_sellerId){
+        List<Product> tmp_productList = g_productRepository.getProductPriceBySellerId(p_sellerId);
+        ArrayList<ProductResponse> l_productResponseList = new ArrayList<>();
+
+        for (int i=0; i<tmp_productList.size(); i++){
+            ProductCategoryReponse tmp_productCategoryResponse = new ProductCategoryReponse();
+            tmp_productCategoryResponse.setId_prd_category(tmp_productList.get(i).getId_prd_category());
+
+            SellerResponse tmp_sellerResponse = new SellerResponse();
+            tmp_sellerResponse.setId_seller(tmp_productList.get(i).getId_seller());
+
+            ProductResponse tmp_productResponse = new ProductResponse();
+            tmp_productResponse.setId_product(tmp_productList.get(i).getId_product());
+            tmp_productResponse.setSeller(tmp_sellerResponse);
+            tmp_productResponse.setPrdCategory(tmp_productCategoryResponse);
+            tmp_productResponse.setProduct_name(tmp_productList.get(i).getProduct_name());
+            tmp_productResponse.setPrice(tmp_productList.get(i).getPrice());
+            tmp_productResponse.setStock(tmp_productList.get(i).getStock());
+            tmp_productResponse.setWeight(tmp_productList.get(i).getWeight());
+            tmp_productResponse.setImage_path(tmp_productList.get(i).getImage_path());
+
+            l_productResponseList.add(tmp_productResponse);
+        }
+
+        return new ResultEntity(l_productResponseList, ErrorCode.BIT_000);
+    }
+
+    public ResultEntity getProductByBestSelling(int p_sellerId){
+        List<Product> tmp_productList = g_productRepository.getProductPriceBySellerId(p_sellerId);
         ArrayList<ProductResponse> l_productResponseList = new ArrayList<>();
 
         for (int i=0; i<tmp_productList.size(); i++){
