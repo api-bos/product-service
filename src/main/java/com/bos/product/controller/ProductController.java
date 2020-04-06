@@ -13,22 +13,22 @@ public class ProductController {
     @Autowired
     ProductService g_productService;
 
-    @GetMapping(value = "/productByName/{id_seller}")
+    @GetMapping(value = "/product-by-name/{id_seller}")
     public ResultEntity getProductByName(@PathVariable("id_seller") int id_seller){
         return g_productService.getProductByName(id_seller);
     }
 
-    @GetMapping(value = "/productByDate/{id_seller}")
+    @GetMapping(value = "/product-by-date/{id_seller}")
     public ResultEntity getProductByDate(@PathVariable("id_seller") int id_seller){
         return g_productService.getProductByDate(id_seller);
     }
 
-    @GetMapping(value = "/productByPrice/{id_seller}")
+    @GetMapping(value = "/product-by-price/{id_seller}")
     public ResultEntity getProductByPrice(@PathVariable("id_seller") int id_seller){
         return g_productService.getProductByPrice(id_seller);
     }
 
-    @GetMapping(value = "/productByBestSelling/{id_seller}")
+    @GetMapping(value = "/product-by-best-selling/{id_seller}")
     public ResultEntity getProductByBestSelling(@PathVariable("id_seller") int id_seller){
         return g_productService.getProductByBestSelling(id_seller);
     }
@@ -48,17 +48,17 @@ public class ProductController {
         return g_productService.deleteProduct(p_productId);
     }
 
-    @GetMapping(value = "/productCategory/{id_seller}")
+    @GetMapping(value = "/product-category/{id_seller}")
     public ResultEntity getProductCategory(@PathVariable("id_seller") int p_sellerId){
         return g_productService.getProductCategory(p_sellerId);
     }
 
-    @GetMapping(value = "/productDetail/{id_product}")
+    @GetMapping(value = "/product-detail/{id_product}")
     public ResultEntity getProductDetail(@PathVariable("id_product") int p_productId){
         return g_productService.getProductDetail(p_productId);
     }
 
-    @GetMapping(value = "/productCategory")
+    @GetMapping(value = "/product-category")
     public ResultEntity getAllProductCategory(){
         return g_productService.getAllProductCategory();
     }

@@ -142,7 +142,8 @@ public class ProductService {
     }
 
     public ResultEntity getProductByBestSelling(int p_sellerId){
-        List<Product> tmp_productList = g_productRepository.getProductPriceBySellerId(p_sellerId);
+        //Get product yg sudah pernah dibeli
+        List<Product> tmp_productList = g_productRepository.getProductBestSellingBySellerId(p_sellerId);
         ArrayList<ProductResponse> l_productResponseList = new ArrayList<>();
 
         for (int i=0; i<tmp_productList.size(); i++){
@@ -163,6 +164,44 @@ public class ProductService {
             tmp_productResponse.setImage_path(tmp_productList.get(i).getImage_path());
 
             l_productResponseList.add(tmp_productResponse);
+        }
+
+        //Get all product
+        List<Product> tmp_allProductList = g_productRepository.getAllProductBySellerId(p_sellerId);
+
+        for (int i=0; i<tmp_allProductList.size(); i++){
+
+            boolean checkAda = false;
+
+            for (int j=0; j<l_productResponseList.size(); j++){
+                if(tmp_allProductList.get(i).getId_product() == l_productResponseList.get(j).getId_product()){
+                    checkAda = true;
+                    break;
+                }
+            }
+
+            if (!checkAda){
+
+                ProductCategoryReponse tmp_productCategoryResponse = new ProductCategoryReponse();
+                tmp_productCategoryResponse.setId_prd_category(tmp_allProductList.get(i).getId_prd_category());
+
+                SellerResponse tmp_sellerResponse = new SellerResponse();
+                tmp_sellerResponse.setId_seller(tmp_allProductList.get(i).getId_seller());
+
+                ProductResponse tmp_productResponse = new ProductResponse();
+                tmp_productResponse.setId_product(tmp_allProductList.get(i).getId_product());
+                tmp_productResponse.setSeller(tmp_sellerResponse);
+                tmp_productResponse.setPrdCategory(tmp_productCategoryResponse);
+                tmp_productResponse.setProduct_name(tmp_allProductList.get(i).getProduct_name());
+                tmp_productResponse.setPrice(tmp_allProductList.get(i).getPrice());
+                tmp_productResponse.setStock(tmp_allProductList.get(i).getStock());
+                tmp_productResponse.setWeight(tmp_allProductList.get(i).getWeight());
+                tmp_productResponse.setImage_path(tmp_allProductList.get(i).getImage_path());
+
+                l_productResponseList.add(tmp_productResponse);
+
+            }
+
         }
 
         return new ResultEntity(l_productResponseList, ErrorCode.BIT_000);
