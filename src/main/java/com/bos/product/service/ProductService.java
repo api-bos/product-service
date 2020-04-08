@@ -29,9 +29,8 @@ public class ProductService {
     ProductCategoryRepository g_productCategoryRepository;
 
     public String saveImage(String p_imageEncoded) {
-        String tmp_uploadLocation = "C:\\Users\\U067726\\Pictures\\BOS\\Product";
         String tmp_fileName = new SimpleDateFormat("yyyyMMdd_HHmmssSSS'.jpg'").format(new Date());
-        String tmp_fullPath = tmp_uploadLocation + File.separator + tmp_fileName;
+        String tmp_fullPath = "NAS-BOS" + File.separator + tmp_fileName;
         try (FileOutputStream tmp_imageOutFile = new FileOutputStream(tmp_fullPath)) {
             // Converting a Base64 String into Image byte array
             byte[] tmp_imageByteArray = Base64.getDecoder().decode(p_imageEncoded);
