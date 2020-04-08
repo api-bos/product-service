@@ -30,7 +30,7 @@ public class ProductService {
 
     public String saveImage(String p_imageEncoded) {
         String tmp_fileName = new SimpleDateFormat("yyyyMMdd_HHmmssSSS'.jpg'").format(new Date());
-        String tmp_fullPath = "\\NAS-BOS\\" + tmp_fileName;
+        String tmp_fullPath = "\\bos\\" + tmp_fileName;
         try (FileOutputStream tmp_imageOutFile = new FileOutputStream(tmp_fullPath)) {
             // Converting a Base64 String into Image byte array
             byte[] tmp_imageByteArray = Base64.getDecoder().decode(p_imageEncoded);
