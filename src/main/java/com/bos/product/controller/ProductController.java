@@ -61,4 +61,9 @@ public class ProductController {
     public ResultEntity getAllProductCategory(){
         return g_productService.getAllProductCategory();
     }
+
+    @GetMapping(value = "/getImage/{path}")
+    public String getBase64(@PathVariable("path") String path){
+        return g_productService.encoder(path);
+    }
 }
