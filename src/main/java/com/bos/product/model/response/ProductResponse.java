@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.math.BigInteger;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,5 +17,5 @@ public class ProductResponse {
     private int price;
     private int stock;
     private String weight;
-    private String image_path;
+    private String base64StringImage;
 }

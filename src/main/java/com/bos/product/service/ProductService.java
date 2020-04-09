@@ -76,7 +76,7 @@ public class ProductService {
             tmp_productResponse.setPrice(tmp_productList.get(i).getPrice());
             tmp_productResponse.setStock(tmp_productList.get(i).getStock());
             tmp_productResponse.setWeight(tmp_productList.get(i).getWeight());
-            tmp_productResponse.setImage_path(tmp_productList.get(i).getImage_path());
+            tmp_productResponse.setBase64StringImage(encoder(tmp_productList.get(i).getImage_path()));
 
             l_productResponseList.add(tmp_productResponse);
         }
@@ -103,7 +103,7 @@ public class ProductService {
             tmp_productResponse.setPrice(tmp_productList.get(i).getPrice());
             tmp_productResponse.setStock(tmp_productList.get(i).getStock());
             tmp_productResponse.setWeight(tmp_productList.get(i).getWeight());
-            tmp_productResponse.setImage_path(tmp_productList.get(i).getImage_path());
+            tmp_productResponse.setBase64StringImage(encoder(tmp_productList.get(i).getImage_path()));
 
             l_productResponseList.add(tmp_productResponse);
         }
@@ -130,7 +130,7 @@ public class ProductService {
             tmp_productResponse.setPrice(tmp_productList.get(i).getPrice());
             tmp_productResponse.setStock(tmp_productList.get(i).getStock());
             tmp_productResponse.setWeight(tmp_productList.get(i).getWeight());
-            tmp_productResponse.setImage_path(tmp_productList.get(i).getImage_path());
+            tmp_productResponse.setBase64StringImage(encoder(tmp_productList.get(i).getImage_path()));
 
             l_productResponseList.add(tmp_productResponse);
         }
@@ -158,7 +158,7 @@ public class ProductService {
             tmp_productResponse.setPrice(tmp_productList.get(i).getPrice());
             tmp_productResponse.setStock(tmp_productList.get(i).getStock());
             tmp_productResponse.setWeight(tmp_productList.get(i).getWeight());
-            tmp_productResponse.setImage_path(tmp_productList.get(i).getImage_path());
+            tmp_productResponse.setBase64StringImage(encoder(tmp_productList.get(i).getImage_path()));
 
             l_productResponseList.add(tmp_productResponse);
         }
@@ -193,7 +193,7 @@ public class ProductService {
                 tmp_productResponse.setPrice(tmp_allProductList.get(i).getPrice());
                 tmp_productResponse.setStock(tmp_allProductList.get(i).getStock());
                 tmp_productResponse.setWeight(tmp_allProductList.get(i).getWeight());
-                tmp_productResponse.setImage_path(tmp_allProductList.get(i).getImage_path());
+                tmp_productResponse.setBase64StringImage(encoder(tmp_productList.get(i).getImage_path()));
 
                 l_productResponseList.add(tmp_productResponse);
 
@@ -285,20 +285,25 @@ public class ProductService {
         return l_output;
     }
 
-    public String encoder(String imagePath) {
-        String base64Image = "";
-        File file = new File("\\NASBOS\\" + imagePath);
-        try (FileInputStream imageInFile = new FileInputStream(file)) {
+    public String encoder(String p_imagePath) {
+        String tmp_base64Image = "";
+        System.out.println(p_imagePath.substring(8));
+        String imagePath = "\\NASBOS\\" + p_imagePath.substring(8);
+        File tmp_file = new File(imagePath);
+        try (FileInputStream tmp_imageInFile = new FileInputStream(tmp_file)) {
             // Reading a Image file from file system
-            byte imageData[] = new byte[(int) file.length()];
-            imageInFile.read(imageData);
-            base64Image = Base64.getEncoder().encodeToString(imageData);
+            byte tmp_imageData[] = new byte[(int) tmp_file.length()];
+            tmp_imageInFile.read(tmp_imageData);
+            tmp_base64Image = Base64.getEncoder().encodeToString(tmp_imageData);
+            return tmp_base64Image;
+
         } catch (FileNotFoundException e) {
             System.out.println("Image not found" + e);
+            return "";
+
         } catch (IOException ioe) {
             System.out.println("Exception while reading the Image " + ioe);
+            return "";
         }
-        System.out.println(base64Image);
-        return base64Image;
     }
 }
