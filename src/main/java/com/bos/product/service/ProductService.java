@@ -287,7 +287,9 @@ public class ProductService {
 
     public String encoder(String p_imagePath) {
         String tmp_base64Image = "";
-        File tmp_file = new File(p_imagePath);
+        System.out.println(p_imagePath.substring(8));
+        String imagePath = "\\NASBOS\\" + p_imagePath.substring(8);
+        File tmp_file = new File(imagePath);
         try (FileInputStream tmp_imageInFile = new FileInputStream(tmp_file)) {
             // Reading a Image file from file system
             byte tmp_imageData[] = new byte[(int) tmp_file.length()];
