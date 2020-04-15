@@ -196,7 +196,7 @@ public class ProductService {
                 tmp_productResponse.setPrice(tmp_allProductList.get(i).getPrice());
                 tmp_productResponse.setStock(tmp_allProductList.get(i).getStock());
                 tmp_productResponse.setWeight(tmp_allProductList.get(i).getWeight());
-                tmp_productResponse.setBase64StringImage(encoder(tmp_productList.get(i).getImage_path()));
+                tmp_productResponse.setBase64StringImage(encoder(tmp_allProductList.get(i).getImage_path()));
 
                 l_productResponseList.add(tmp_productResponse);
 
