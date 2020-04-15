@@ -142,6 +142,7 @@ public class ProductService {
         //Get product yg sudah pernah dibeli
         List<Product> tmp_productList = g_productRepository.getProductBestSellingBySellerId(p_sellerId);
         ArrayList<ProductResponse> l_productResponseList = new ArrayList<>();
+        System.out.println("best selling-1");
 
         for (int i=0; i<tmp_productList.size(); i++){
             ProductCategoryReponse tmp_productCategoryResponse = new ProductCategoryReponse();
@@ -162,9 +163,11 @@ public class ProductService {
 
             l_productResponseList.add(tmp_productResponse);
         }
+        System.out.println("best selling-2");
 
         //Get all product
         List<Product> tmp_allProductList = g_productRepository.getAllProductBySellerId(p_sellerId);
+        System.out.println("best selling-3");
 
         for (int i=0; i<tmp_allProductList.size(); i++){
 
@@ -201,6 +204,7 @@ public class ProductService {
 
         }
 
+        System.out.println("best selling-4");
         return new ResultEntity(l_productResponseList, ErrorCode.BIT_000);
     }
 

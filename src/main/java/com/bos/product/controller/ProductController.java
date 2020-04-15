@@ -29,6 +29,7 @@ public class ProductController {
 
     @GetMapping(value = "/product-by-best-selling/{id_seller}")
     public ResultEntity getProductByBestSelling(@PathVariable("id_seller") int id_seller){
+        System.out.println("try product-by-best-selling");
         return g_productService.getProductByBestSelling(id_seller);
     }
 

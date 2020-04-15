@@ -28,7 +28,7 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
             "WHERE td.id_transaction\n" +
             "IN (SELECT id_transaction\n" +
             "\tFROM transaction\n" +
-            "\tWHERE id_seller= :id_seller and status=3 and prd.is_deleted=0)\n" +
+            "\tWHERE id_seller= :id_seller and status=3) and prd.is_deleted=0\n" +
             "GROUP BY prd.id_product, prd.product_name\n" +
             "ORDER BY SUM(td.quantity) DESC", nativeQuery = true)
     List<Product> getProductBestSellingBySellerId(@Param("id_seller") int p_sellerId);
